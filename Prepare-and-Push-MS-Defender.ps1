@@ -4,10 +4,17 @@ $file2 = "c:\md4ws.msi" #MS downloaded msi
 $file3 = "c:\WindowsDefenderATPOnboardingScript.cmd" #MS downloaded .cmd
 
 foreach ($server in $servers){
-    
-    Copy-Item -Path $file1 -Destination \\$($server)\c$\temp
-    Copy-Item -Path $file2 -Destination \\$($server)\c$\temp
-    Copy-Item -Path $file3 -Destination \\$($server)\c$\temp
+    if (Test-Path -Path \\$($server)\c$\temp){
+        Copy-Item -Path $file1 -Destination \\$($server)\c$\temp
+        Copy-Item -Path $file2 -Destination \\$($server)\c$\temp
+        Copy-Item -Path $file3 -Destination \\$($server)\c$\temp
+    }
+    else{
+        New-Item -Path \\$($server)\c$\ -Name temp -ItemType Directory -Force
+        Copy-Item -Path $file1 -Destination \\$($server)\c$\temp
+        Copy-Item -Path $file2 -Destination \\$($server)\c$\temp
+        Copy-Item -Path $file3 -Destination \\$($server)\c$\temp
+    }
 }
 
 foreach ($server in $servers){
