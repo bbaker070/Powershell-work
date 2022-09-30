@@ -1,4 +1,4 @@
-$Domains = (Get-ADForest).Domains | Sort-Object {$_.length} | Select-Object -Skip 1
+$Domains = (Get-ADForest).Domains 
 $SecGroup = Get-ADGroupMember -Identity "AD SECURITY GROUP" | Select-Object -Property name,samaccountname
 
 $Users = foreach ($User in $SecGroup){
