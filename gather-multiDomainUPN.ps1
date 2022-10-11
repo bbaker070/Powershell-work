@@ -1,4 +1,4 @@
-$Lookup = Import-Csv -Path C:\Computers.csv
+$Lookup = Import-Csv -Path C:\UsersWithDomainPrefix.csv
 
 $printOut = foreach ($user in $Lookup.Primary){
     foreach ($uniqueUser in $user.Split(',') | Select-Object -First 1){
