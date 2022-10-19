@@ -1,0 +1,10 @@
+$passw = Get-ADUser -Server $server -Filter * -Properties PasswordLastSet, PasswordNeverExpires `
+    | Where-Object {($_.PasswordLastSet -NE $null) `
+        -and ($_.PasswordNeverExpires -NE $true)} `
+    | Select-Object -Property PasswordLastSet 
+    #| Export-Csv -Path C:\PSChanges.csv -NoTypeInformation
+
+$futurePW = foreach ($pass in $passw.passwordlastset){
+ $newdate = ($pass).adddays(90)
+}
+$futurePW | Export-Csv -Path C:\PSChanges.csv -NoTypeInformation
