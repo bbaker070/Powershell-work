@@ -1,3 +1,4 @@
+##quick 1 minute script to grab when PWs were changed and adding ## of days to forecast next time pws are changed. output is poor quality
 $passw = Get-ADUser -Server $server -Filter * -Properties PasswordLastSet, PasswordNeverExpires `
     | Where-Object {($_.PasswordLastSet -NE $null) `
         -and ($_.PasswordNeverExpires -NE $true)} `
@@ -5,6 +6,6 @@ $passw = Get-ADUser -Server $server -Filter * -Properties PasswordLastSet, Passw
     #| Export-Csv -Path C:\PSChanges.csv -NoTypeInformation
 
 $futurePW = foreach ($pass in $passw.passwordlastset){
- $newdate = ($pass).adddays(90)
+ $newdate = ($pass).adddays(##)
 }
 $futurePW | Export-Csv -Path C:\PSChanges.csv -NoTypeInformation
