@@ -1,4 +1,4 @@
-##quick & dirty 1 minute script to grab when PWs were changed and adding ## of days to forecast next time pws are changed. output is poor quality
+##grab when PWs were changed and adding ## of days to forecast next time pws are changed.
 $Domains = (Get-ADForest).Domains
 $Data_ = @()
 
@@ -19,7 +19,7 @@ Foreach ($Domain in $Domains){
 $Data_ | Export-Csv -Path C:\PWChanges.csv -NoTypeInformation -Force
 
 
-<#$futurePW = foreach ($pass in $passw.passwordlastset){
-    ($pass).adddays(90)
+<#$futurePW = foreach ($pass in $Data_.PasswordLastSet){
+    ($pass).adddays(##)
 }
 $futurePW | Export-Csv -Path C:\PSChanges.csv -NoTypeInformation#>
